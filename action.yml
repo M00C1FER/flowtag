@@ -1,0 +1,39 @@
+name: 'flowtag'
+description: 'Conventional Commits → semver bump + CHANGELOG'
+author: 'flowtag contributors'
+branding: { icon: 'tag', color: 'blue' }
+
+inputs:
+  mode:
+    description: 'bump | next-version | changelog | write-changelog'
+    required: false
+    default: 'next-version'
+
+outputs:
+  bump:
+    description: 'major | minor | patch | none'
+    value: ${{ steps.run.outputs.bump }}
+  next-version:
+    description: 'computed next version'
+    value: ${{ steps.run.outputs.next-version }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-go@v5
+      with: { go-version: '1.22' }
+    - name: Build flowtag
+      shell: bash
+      run: |
+        go install github.com/M00C1FER/flowtag/cmd/flowtag@latest
+    - name: Run flowtag
+      id: run
+      shell: bash
+      run: |
+        case "${{ inputs.mode }}" in
+          bump)            BUMP=$(flowtag --bump);          echo "bump=$BUMP" >> "$GITHUB_OUTPUT";;
+          next-version)    NV=$(flowtag --next-version);    echo "next-version=$NV" >> "$GITHUB_OUTPUT";;
+          changelog)       flowtag --changelog;;
+          write-changelog) flowtag --write-changelog;;
+          *) echo "::error::unknown mode ${{ inputs.mode }}"; exit 1;;
+        esac
