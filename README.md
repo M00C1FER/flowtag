@@ -1,3 +1,9 @@
+> ⚠️ **DEPRECATED — v0.1 archived 2026-04-30.**  This repo was a portfolio exercise. After a 12-iteration / 27-domain competitive analysis, the recommended production path is:
+>
+> **release-please** (https://github.com/googleapis/release-please-action) — GitHub-verified · **git-cliff** (https://github.com/orhun/git-cliff) — Rust changelog generator
+>
+> The code below remains available for reference but is **no longer maintained**. See the linked alternatives for production use.
+
 # flowtag
 
 > **Conventional Commits → semver bump + auto-CHANGELOG + draft release notes.** Single Go binary, zero deps, works as a GitHub Action OR a local CLI. Modular bump rules. Drop-in for any repo, any language.
