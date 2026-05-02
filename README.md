@@ -103,6 +103,17 @@ go test ./...
 
 15 tests cover Conventional Commits parsing (incl. scoped, breaking via `!`, breaking via footer), bump computation across all kinds, and CHANGELOG rendering.
 
+## Cross-platform support
+
+| Platform | Install method | Notes |
+|---|---|---|
+| **Debian 12/13, Ubuntu 22.04/24.04** | `go install` or `install.sh` | `apt install golang-go` if Go absent |
+| **Arch / Manjaro** | `go install` or `install.sh` | `pacman -S go` |
+| **Fedora / RHEL / Rocky** | `go install` or `install.sh` | `dnf install golang` |
+| **Alpine** | `go install` or `install.sh` | `apk add go`; glibc not required (pure Go) |
+| **WSL2 (Ubuntu)** | same as Ubuntu | no `/sys/firmware/efi` assumptions |
+| **Termux (Android arm64)** | `pkg install golang && go install github.com/M00C1FER/flowtag/cmd/flowtag@latest` | `install.sh` also detects Termux automatically |
+
 ## Roadmap
 
 - v0.2: YAML bump-rule overrides; GitHub Release publisher
